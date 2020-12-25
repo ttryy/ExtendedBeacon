@@ -1,0 +1,16 @@
+#
+#  ______      _                 _          _ ____
+# |  ____|    | |               | |        | |  _ \
+# | |__  __  _| |_ ___ _ __   __| | ___  __| | |_) | ___  __ _  ___ ___  _ __
+# |  __| \ \/ / __/ _ \ '_ \ / _` |/ _ \/ _` |  _ < / _ \/ _` |/ __/ _ \| '_ \
+# | |____ >  <| ||  __/ | | | (_| |  __/ (_| | |_) |  __/ (_| | (_| (_) | | | |
+# |______/_/\_\\__\___|_| |_|\__,_|\___|\__,_|____/ \___|\__,_|\___\___/|_| |_|
+#
+#
+# by TTRyY01vbkRF
+
+tooglemobspawning: true
+
+messages:
+  MOB_SPAWNING: "&eMobs can spawn in your beacon radius."
+  NO_MOB_SPAWNING: "&eMobs can no longer spawn in your beacon radius."

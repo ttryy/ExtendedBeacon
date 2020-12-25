@@ -1,0 +1,8 @@
+name: ExtendedBeacon
+version: 0.0.1
+author: TTRyY01vbkRF
+api-version: 1.16
+
+load: STARTUP
+
+main: xyz.ttryy.extendedbeacon.main.ExtendedBeaconPlugin
