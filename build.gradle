@@ -25,7 +25,7 @@ publishing {
 
             groupId = 'xyz.ttryy'
             artifactId = 'extendedbeacon'
-            version = '0.0.1-SNAPSHOT'
+            version = '0.0.2-SNAPSHOT'
         }
     }
 }
@@ -36,9 +36,9 @@ publishing {
 
             project.shadow.component(publication)
 
-            groupId = 'de.ttryy'
-            artifactId = 'antiafkfarming'
-            version = '0.2.2-SNAPSHOT'
+            groupId = 'xyz.ttryy'
+            artifactId = 'extendedbeacon'
+            version = '0.0.2-SNAPSHOT'
         }
     }
 }
