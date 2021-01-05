@@ -21,7 +21,9 @@ public class MobSpawnListener implements Listener {
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent event){
         if(event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL){
-            return;
+            if(!(event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM && plugin.isCustomReason())){
+                return;
+            }
         }
 
         for(Beacon beacon : plugin.getBeacons()){
@@ -44,7 +46,9 @@ public class MobSpawnListener implements Listener {
                 if(location.distance(beacon.getLocation()) <= range){
                     //Visualizes the mobs (not) spawning
                     //event.getLocation().getWorld().spawnEntity(event.getLocation(), EntityType.ARMOR_STAND).setGlowing(true);
-                    event.setCancelled(true);
+                    if(!plugin.getWhitelist().contains(event.getEntityType())){
+                        event.setCancelled(true);
+                    }
                 }
             }
         }

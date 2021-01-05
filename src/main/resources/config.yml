@@ -9,6 +9,10 @@
 #
 # by TTRyY01vbkRF
 
+mob_spawning:
+  block_custom_reason: false
+  whitelist: []
+
 messages:
   MOB_SPAWNING: "&eMobs can spawn in your beacon radius."
   NO_MOB_SPAWNING: "&eMobs can no longer spawn in your beacon radius."
