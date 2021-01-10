@@ -23,8 +23,8 @@ public class ChunkListener implements Listener {
     @EventHandler
     public void onChunkLoad(ChunkLoadEvent event){
         for(BlockState state : event.getChunk().getTileEntities()){
-            if(state instanceof Beacon && !plugin.getBeacons().contains((Beacon) state)){
-                plugin.getBeacons().add((Beacon) state);
+            if(state instanceof Beacon && !plugin.getBeacons().contains(state.getLocation())){
+                plugin.getBeacons().add(state.getLocation());
             }
         }
     }
@@ -32,8 +32,8 @@ public class ChunkListener implements Listener {
     @EventHandler
     public void onChunkUnload(ChunkUnloadEvent event){
         for(BlockState state : event.getChunk().getTileEntities()){
-            if(state instanceof Beacon && plugin.getBeacons().contains((Beacon) state)){
-                plugin.getBeacons().remove((Beacon) state);
+            if(state instanceof Beacon && plugin.getBeacons().contains(state.getLocation())){
+                plugin.getBeacons().remove(state.getLocation());
             }
         }
     }
@@ -42,8 +42,8 @@ public class ChunkListener implements Listener {
     public void onWorldLoad(WorldLoadEvent event){
         Arrays.stream(event.getWorld().getLoadedChunks()).forEach(chunk -> {
             Arrays.stream(chunk.getTileEntities()).forEach(tileEntity -> {
-                if(tileEntity instanceof Beacon && !plugin.getBeacons().contains((Beacon) tileEntity)){
-                    plugin.getBeacons().add((Beacon) tileEntity);
+                if(tileEntity instanceof Beacon && !plugin.getBeacons().contains(tileEntity.getLocation())){
+                    plugin.getBeacons().add(tileEntity.getLocation());
                 }
             });
         });
@@ -53,8 +53,8 @@ public class ChunkListener implements Listener {
     public void onWorldUnload(WorldUnloadEvent event){
         Arrays.stream(event.getWorld().getLoadedChunks()).forEach(chunk -> {
             Arrays.stream(chunk.getTileEntities()).forEach(tileEntity -> {
-                if(tileEntity instanceof Beacon && plugin.getBeacons().contains((Beacon) tileEntity)){
-                    plugin.getBeacons().remove((Beacon) tileEntity);
+                if(tileEntity instanceof Beacon && plugin.getBeacons().contains(tileEntity.getLocation())){
+                    plugin.getBeacons().remove(tileEntity.getLocation());
                 }
             });
         });

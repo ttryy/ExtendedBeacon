@@ -16,3 +16,5 @@ mob_spawning:
 messages:
   MOB_SPAWNING: "&eMobs can spawn in your beacon radius."
   NO_MOB_SPAWNING: "&eMobs can no longer spawn in your beacon radius."
+  HUNGER: "&eYou loose hunger in your beacon radius."
+  NO_HUNGER: "&eYou no longer loose hunger in your beacon radius."

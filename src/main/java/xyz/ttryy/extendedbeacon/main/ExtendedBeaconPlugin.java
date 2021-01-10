@@ -1,14 +1,18 @@
 package xyz.ttryy.extendedbeacon.main;
 
 import com.google.common.collect.Lists;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Beacon;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.ttryy.extendedbeacon.listener.ChunkListener;
+import xyz.ttryy.extendedbeacon.listener.HungerListener;
 import xyz.ttryy.extendedbeacon.listener.InteractBeaconListener;
 import xyz.ttryy.extendedbeacon.listener.MobSpawnListener;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ExtendedBeaconPlugin extends JavaPlugin {
@@ -16,7 +20,8 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
     private static ExtendedBeaconPlugin instance;
 
     private NamespacedKey torchedKey;
-    private List<Beacon> beacons;
+    private NamespacedKey hungerKey;
+    private List<Location> beacons;
 
     private boolean customReason;
     private List<EntityType> whitelist;
@@ -26,10 +31,13 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
         instance = this;
 
         torchedKey = new NamespacedKey(this, "torched");
+        hungerKey = new NamespacedKey(this, "hunger");
         beacons = Lists.newArrayList();
 
-        loadConfig();
         saveDefaultConfig();
+        loadConfig();
+
+        loadLoadedBeacons();
 
         initListener();
     }
@@ -38,6 +46,7 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
         new InteractBeaconListener(this);
         new MobSpawnListener(this);
         new ChunkListener(this);
+        new HungerListener(this);
     }
 
     private void loadConfig(){
@@ -48,12 +57,28 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
         });
     }
 
-    public List<Beacon> getBeacons() {
+    private void loadLoadedBeacons(){
+        Bukkit.getWorlds().forEach(world -> {
+            Arrays.asList(world.getLoadedChunks()).forEach(chunk -> {
+                Arrays.asList(chunk.getTileEntities()).forEach(tileEntity -> {
+                    if(tileEntity instanceof Beacon && !getBeacons().contains(tileEntity.getLocation())){
+                        getBeacons().add(tileEntity.getLocation());
+                    }
+                });
+            });
+        });
+    }
+
+    public List<Location> getBeacons() {
         return beacons;
     }
 
     public NamespacedKey getTorchedKey() {
         return torchedKey;
+    }
+
+    public NamespacedKey getHungerKey() {
+        return hungerKey;
     }
 
     public boolean isCustomReason() {

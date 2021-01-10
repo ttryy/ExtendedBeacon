@@ -7,7 +7,9 @@ import xyz.ttryy.extendedbeacon.main.ExtendedBeaconPlugin;
 public enum Messages {
 
     NO_MOB_SPAWNING("NO_MOB_SPAWNING"),
-    MOB_SPAWNING("MOB_SPAWNING");
+    MOB_SPAWNING("MOB_SPAWNING"),
+    NO_HUNGER("NO_HUNGER"),
+    HUNGER("HUNGER");
 
     private String message;
 

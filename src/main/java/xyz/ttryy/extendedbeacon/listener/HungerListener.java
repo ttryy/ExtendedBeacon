@@ -6,57 +6,50 @@ import org.bukkit.block.Beacon;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 import xyz.ttryy.extendedbeacon.main.ExtendedBeaconPlugin;
 import xyz.ttryy.extendedbeacon.utils.BeaconUtils;
 
-public class MobSpawnListener implements Listener {
+public class HungerListener implements Listener {
 
     private ExtendedBeaconPlugin plugin;
 
-    public MobSpawnListener(ExtendedBeaconPlugin plugin) {
+    public HungerListener(ExtendedBeaconPlugin plugin) {
         this.plugin = plugin;
+
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    public void onMobSpawn(CreatureSpawnEvent event){
-        if(event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL){
-            if(!(event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM && plugin.isCustomReason())){
-                return;
-            }
-        }
-
+    public void onPlayerHunger(FoodLevelChangeEvent event){
         for(Location beaconLocation : plugin.getBeacons()){
             if(beaconLocation.getBlock().getType() != Material.BEACON) {
                 plugin.getBeacons().remove(beaconLocation);
                 continue;
             }
 
-            if(beaconLocation.getWorld() != event.getLocation().getWorld()){
+            if(beaconLocation.getWorld() != event.getEntity().getLocation().getWorld()){
                 continue;
             }
 
             Beacon beacon = (Beacon) beaconLocation.getBlock().getState();
 
             if(beacon.getTier() > 0 &&
-                    beacon.getPersistentDataContainer().has(plugin.getTorchedKey(), PersistentDataType.INTEGER) &&
-                    beacon.getPersistentDataContainer().get(plugin.getTorchedKey(), PersistentDataType.INTEGER) == 1){
+                    beacon.getPersistentDataContainer().has(plugin.getHungerKey(), PersistentDataType.INTEGER) &&
+                    beacon.getPersistentDataContainer().get(plugin.getHungerKey(), PersistentDataType.INTEGER) == 1){
                 int range = 10 + beacon.getTier()*10;
 
-                Location location = event.getLocation();
+                Location location = event.getEntity().getLocation();
 
                 if(BeaconUtils.isInSquareRangeIgnoreUp(beacon.getLocation(), location, range)){
-                    //Visualizes the mobs (not) spawning
-                    //event.getLocation().getWorld().spawnEntity(event.getLocation(), EntityType.ARMOR_STAND).setGlowing(true);
-                    if(!plugin.getWhitelist().contains(event.getEntityType())){
+                    if(event.getItem() == null && !event.getEntity().hasPotionEffect(PotionEffectType.SATURATION)){
                         event.setCancelled(true);
                         break;
                     }
                 }
             }
         }
-
     }
 }

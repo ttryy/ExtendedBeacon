@@ -4,7 +4,8 @@ import org.bukkit.entity.Player;
 
 public enum Permissions {
 
-    TOGGLE_MOB_SPAWNING("extendedbeacon.togglemobspawning");
+    TOGGLE_MOB_SPAWNING("extendedbeacon.togglemobspawning"),
+    TOOGLE_HUNGER("extendedbeacon.togglehunger");
 
     private String permission;
 

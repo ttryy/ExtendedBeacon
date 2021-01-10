@@ -49,12 +49,38 @@ public class InteractBeaconListener implements Listener {
             if(torched == 0){
                 beacon.getPersistentDataContainer().set(plugin.getTorchedKey(), PersistentDataType.INTEGER, 1);
                 Messages.NO_MOB_SPAWNING.send(event.getPlayer());
-                if(!plugin.getBeacons().contains(beacon)){
-                    plugin.getBeacons().add(beacon);
+                if(!plugin.getBeacons().contains(beacon.getLocation())){
+                    plugin.getBeacons().add(beacon.getLocation());
                 }
             } else if(torched == 1){
                 beacon.getPersistentDataContainer().set(plugin.getTorchedKey(), PersistentDataType.INTEGER, 0);
                 Messages.MOB_SPAWNING.send(event.getPlayer());
+            }
+            event.setCancelled(true);
+            beacon.update();
+        }
+
+        // Decides if players recieve hunger in beacon radius
+        if(event.getPlayer().getInventory().getItemInMainHand().getType() == Material.APPLE){
+            // Player need permission to change the mob spawning
+            if(!event.getPlayer().hasPermission(Permissions.TOOGLE_HUNGER.getPermission())){
+                return;
+            }
+
+            int hunger = 0;
+            if(beacon.getPersistentDataContainer().has(plugin.getHungerKey(), PersistentDataType.INTEGER)){
+                hunger = beacon.getPersistentDataContainer().get(plugin.getHungerKey(), PersistentDataType.INTEGER);
+            }
+
+            if(hunger == 0){
+                beacon.getPersistentDataContainer().set(plugin.getHungerKey(), PersistentDataType.INTEGER, 1);
+                Messages.NO_HUNGER.send(event.getPlayer());
+                if(!plugin.getBeacons().contains(beacon.getLocation())){
+                    plugin.getBeacons().add(beacon.getLocation());
+                }
+            } else if(hunger == 1){
+                beacon.getPersistentDataContainer().set(plugin.getHungerKey(), PersistentDataType.INTEGER, 0);
+                Messages.HUNGER.send(event.getPlayer());
             }
             event.setCancelled(true);
             beacon.update();
