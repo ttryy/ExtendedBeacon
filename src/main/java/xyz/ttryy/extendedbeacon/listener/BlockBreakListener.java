@@ -51,8 +51,8 @@ public class BlockBreakListener implements Listener {
         if (hunger || mobSpawning) {
             ItemStack beaconItem = new ItemStack(Material.BEACON, 1);
             ItemMeta beaconMeta = beaconItem.getItemMeta();
-            beaconMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-            beaconMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            //beaconMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+            //beaconMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
             List<String> beaconLore = beaconMeta.getLore();
             if(beaconLore == null) beaconLore = Lists.newArrayList();
