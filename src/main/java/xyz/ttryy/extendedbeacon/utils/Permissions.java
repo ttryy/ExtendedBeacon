@@ -5,7 +5,8 @@ import org.bukkit.entity.Player;
 public enum Permissions {
 
     TOGGLE_MOB_SPAWNING("extendedbeacon.togglemobspawning"),
-    TOOGLE_HUNGER("extendedbeacon.togglehunger");
+    TOOGLE_HUNGER("extendedbeacon.togglehunger"),
+    CAN_BREAK_BEACON("extendedbeacon.canbreakbeacon");
 
     private String permission;
 

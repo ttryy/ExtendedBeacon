@@ -18,3 +18,5 @@ messages:
   NO_MOB_SPAWNING: "&eMobs can no longer spawn in your beacon radius."
   HUNGER: "&eYou loose hunger in your beacon radius."
   NO_HUNGER: "&eYou no longer loose hunger in your beacon radius."
+  MOB_SPAWNING_ITEMLORE: "&eMobs can't spawn in this Beacons radius."
+  HUNGER_ITEMLORE: "&eYou don't get hungry in this Beacons radius."

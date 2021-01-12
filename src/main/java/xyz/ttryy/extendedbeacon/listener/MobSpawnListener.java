@@ -11,6 +11,8 @@ import org.bukkit.persistence.PersistentDataType;
 import xyz.ttryy.extendedbeacon.main.ExtendedBeaconPlugin;
 import xyz.ttryy.extendedbeacon.utils.BeaconUtils;
 
+import java.util.Iterator;
+
 public class MobSpawnListener implements Listener {
 
     private ExtendedBeaconPlugin plugin;
@@ -28,9 +30,13 @@ public class MobSpawnListener implements Listener {
             }
         }
 
-        for(Location beaconLocation : plugin.getBeacons()){
+        Iterator<Location> beaconLocations = plugin.getBeacons().iterator();
+
+        while(beaconLocations.hasNext()){
+            Location beaconLocation = beaconLocations.next();
+
             if(beaconLocation.getBlock().getType() != Material.BEACON) {
-                plugin.getBeacons().remove(beaconLocation);
+                beaconLocations.remove();
                 continue;
             }
 

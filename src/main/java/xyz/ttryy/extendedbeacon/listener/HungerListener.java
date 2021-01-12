@@ -12,6 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 import xyz.ttryy.extendedbeacon.main.ExtendedBeaconPlugin;
 import xyz.ttryy.extendedbeacon.utils.BeaconUtils;
 
+import java.util.Iterator;
+
 public class HungerListener implements Listener {
 
     private ExtendedBeaconPlugin plugin;
@@ -24,9 +26,13 @@ public class HungerListener implements Listener {
 
     @EventHandler
     public void onPlayerHunger(FoodLevelChangeEvent event){
-        for(Location beaconLocation : plugin.getBeacons()){
+        Iterator<Location> beaconLocations = plugin.getBeacons().iterator();
+
+        while(beaconLocations.hasNext()){
+            Location beaconLocation = beaconLocations.next();
+
             if(beaconLocation.getBlock().getType() != Material.BEACON) {
-                plugin.getBeacons().remove(beaconLocation);
+                beaconLocations.remove();
                 continue;
             }
 

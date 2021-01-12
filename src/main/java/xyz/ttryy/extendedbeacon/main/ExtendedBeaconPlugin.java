@@ -7,10 +7,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.Beacon;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.ttryy.extendedbeacon.listener.ChunkListener;
-import xyz.ttryy.extendedbeacon.listener.HungerListener;
-import xyz.ttryy.extendedbeacon.listener.InteractBeaconListener;
-import xyz.ttryy.extendedbeacon.listener.MobSpawnListener;
+import xyz.ttryy.extendedbeacon.listener.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +44,8 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
         new MobSpawnListener(this);
         new ChunkListener(this);
         new HungerListener(this);
+        new BlockPlaceListener(this);
+        new BlockBreakListener(this);
     }
 
     private void loadConfig(){

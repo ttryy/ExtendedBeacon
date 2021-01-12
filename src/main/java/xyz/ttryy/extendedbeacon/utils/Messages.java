@@ -9,7 +9,9 @@ public enum Messages {
     NO_MOB_SPAWNING("NO_MOB_SPAWNING"),
     MOB_SPAWNING("MOB_SPAWNING"),
     NO_HUNGER("NO_HUNGER"),
-    HUNGER("HUNGER");
+    HUNGER("HUNGER"),
+    MOB_SPAWNING_ITEMLORE("MOB_SPAWNING_ITEMLORE"),
+    HUNGER_ITEMLORE("HUNGER_ITEMLORE");
 
     private String message;
 
@@ -24,5 +26,9 @@ public enum Messages {
 
     public void send(CommandSender sender){
         sender.sendMessage(message);
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
