@@ -14,7 +14,7 @@ mob_spawning:
   whitelist: []
 
 default:
-  stop_mob_spawning: true
+  stop_mob_spawning: false
   stop_hunger: false
   
 messages:

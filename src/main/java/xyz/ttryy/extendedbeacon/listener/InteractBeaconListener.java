@@ -1,7 +1,6 @@
 package xyz.ttryy.extendedbeacon.listener;
 
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.block.Beacon;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

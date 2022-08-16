@@ -1,9 +1,7 @@
 package xyz.ttryy.extendedbeacon.listener;
 
 import org.bukkit.block.Beacon;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.libs.jline.internal.Log;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.*;
