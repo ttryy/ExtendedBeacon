@@ -23,6 +23,11 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
     private boolean customReason;
     private List<EntityType> whitelist;
 
+    //adding in default buffs. STH 2022-0210
+    private boolean defaultStopMobSpawn;
+    private boolean defaultStopHunger;
+    //#######
+
     @Override
     public void onEnable() {
         instance = this;
@@ -51,6 +56,10 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
     private void loadConfig(){
         whitelist = Lists.newArrayList();
         customReason = getConfig().getBoolean("mob_spawning.block_custom_reason", false);
+        //adding in default buffs. STH 2022-0210
+        defaultStopMobSpawn = getConfig().getBoolean("default.stop_mob_spawning", false);
+        defaultStopHunger = getConfig().getBoolean("default.stop_hunger", false);
+        //#######
         getConfig().getStringList("mob_spawning.whitelist").forEach(type -> {
             if(EntityType.valueOf(type) != null) whitelist.add(EntityType.valueOf(type));
         });
@@ -90,5 +99,13 @@ public class ExtendedBeaconPlugin extends JavaPlugin {
 
     public static ExtendedBeaconPlugin getInstance() {
         return instance;
+    }
+
+    public boolean getDefaultStopMobSpawn() {
+        return defaultStopMobSpawn;
+    }
+
+    public boolean getDefaultStopHunger() {
+        return defaultStopHunger;
     }
 }
